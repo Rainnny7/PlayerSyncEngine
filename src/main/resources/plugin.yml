@@ -1,0 +1,4 @@
+name: PlayerSyncEngine
+version: ${project.version}
+main: me.braydon.sync.PlayerSyncEngine
+api-version: 1.20
