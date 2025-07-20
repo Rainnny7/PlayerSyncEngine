@@ -11,7 +11,7 @@
     </parent>
 
     <!-- Project Details -->
-    <artifactId>PlayerSyncEngine-Engine</artifactId>
+    <artifactId>PlayerSyncEngine-Plugin</artifactId>
 
     <!-- Properties -->
     <properties>
