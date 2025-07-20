@@ -11,3 +11,13 @@ PlayerSyncEngine synchronizes player data across multiple Minecraft servers in r
 With a lightweight architecture and a feature-rich API, it's designed for high performance and easy extensibility. Support for orchestration layers means servers can be dynamically spun up or down as needed, making it ideal for scalable, cloud-native deployments.
 
 Whether you're managing a handful of game modes or running a large network, this system keeps players connected — no matter where they are.
+
+## Structure
+
+This is a multi-module Maven project structured into several layers, each with a distinct responsibility:
+
+- **`data/`** – The shared data layer. Contains common models, database implementations, and utilities used throughout the project.
+- **`orchestration/`** – The orchestration layer. Handles automated server lifecycle management, including dynamically spinning servers up or down based on demand.
+- **`engine/`** – The core sync engine. Intercepts packets from the internal messaging layer to synchronize systems like chat, tablist, and actual player movement across servers.
+- **`metrics/`** – The global metrics layer. Aggregates and exposes metrics across the entire cluster — including all game servers, orchestration events, and sync operations — to provide full visibility into system health and performance.
+- **`plugin/`** – The Spigot plugin. Gathers and reports server-specific metrics like TPS, whitelist status, and player counts.
