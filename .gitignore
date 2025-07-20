@@ -16,6 +16,7 @@ replay_pid*
 cmake-build-*/
 .idea/**/mongoSettings.xml
 *.iws
+*.env
 out/
 build/
 work/
