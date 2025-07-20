@@ -21,3 +21,6 @@ This is a multi-module Maven project structured into several layers, each with a
   Redis is used as the internal messaging channel for real-time communication between nodes, while MongoDB stores persistent player data such as inventories, health, location, and more.
 - **`metrics/`** – The global metrics layer utilizing InfluxDB. Aggregates and exposes metrics across the entire cluster — including all game servers, orchestration events, and sync operations — to provide full visibility into system health and performance.
 - **`plugin/`** – The Spigot plugin. Gathers and reports server-specific metrics like TPS, whitelist status, and player counts.
+
+## Roadmap
+- [ ] ...
