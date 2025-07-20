@@ -17,7 +17,7 @@ Whether you're managing a handful of game modes or running a large network, this
 This is a multi-module Maven project structured into several layers, each with a distinct responsibility:
 - **`data/`** – The shared data layer. Contains common models, database implementations, and utilities used throughout the project.
 - **`orchestration/`** – The orchestration layer utilizing Docker. Handles automated server lifecycle management, including dynamically spinning servers up or down based on demand.
-- **`engine/`** – The core sync engine. Responsible for synchronizing critical systems like chat, tablist, and physical player movement between servers.  
+- **`engine/`** – The core sync engine. Responsible for synchronizing critical systems like chat, tablist, and physical player movement between servers.
   Redis is used as the internal messaging channel for real-time communication between nodes, while MongoDB stores persistent player data such as inventories, health, location, and more.
 - **`metrics/`** – The global metrics layer utilizing InfluxDB. Aggregates and exposes metrics across the entire cluster — including all game servers, orchestration events, and sync operations — to provide full visibility into system health and performance.
 - **`plugin/`** – The Spigot plugin. Gathers and reports server-specific metrics like TPS, whitelist status, and player counts.

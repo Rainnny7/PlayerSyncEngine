@@ -1,5 +1,6 @@
 *.class
 *.log
+*.iml
 *.ctxt
 .mtj.tmp/
 *.jar
@@ -27,3 +28,4 @@ crashlytics-build.properties
 fabric.properties
 git.properties
 pom.xml.versionsBackup
+servers/
