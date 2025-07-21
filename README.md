@@ -29,6 +29,8 @@ This is a multi-module Maven project structured into several layers, each with a
 - [ ] Inventories
 - [ ] Realtime (Movement, Sneaking, Swimming, etc.)
 - [ ] Blocks
+- [ ] World Stats?
+- [ ] Advancements?
 
 ## Environment Variables
 
