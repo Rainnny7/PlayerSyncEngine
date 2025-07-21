@@ -87,6 +87,23 @@ public final class RedisDatabase implements IDatabase<StatefulRedisConnection<St
     }
 
     /**
+     * Get the ping to this database.
+     *
+     * @return the ping in milliseconds
+     */
+    @Override
+    public long getPing() {
+        try {
+            long before = System.currentTimeMillis();
+            standardConnection.sync().ping();
+            return System.currentTimeMillis() - before;
+        } catch (Exception ex) {
+            log.error("Failed to ping Redis server", ex);
+            return -1L;
+        }
+    }
+
+    /**
      * Initialize the subscriber to handle receiving of messages across the network.
      */
     private void initializeSubscriber() {

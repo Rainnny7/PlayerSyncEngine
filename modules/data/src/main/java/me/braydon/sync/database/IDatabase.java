@@ -26,6 +26,13 @@ public interface IDatabase<T> {
     @NonNull T getConnection();
 
     /**
+     * Get the ping to this database.
+     *
+     * @return the ping in milliseconds
+     */
+    long getPing();
+
+    /**
      * Cleanup any resources used by this database.
      */
     void cleanup();

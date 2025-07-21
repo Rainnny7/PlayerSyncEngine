@@ -1,8 +1,11 @@
 package me.braydon.sync;
 
+import co.aikar.commands.PaperCommandManager;
 import lombok.Getter;
+import me.braydon.sync.command.PlayerSyncEngineCommand;
 import me.braydon.sync.database.redis.RedisDatabase;
-import me.braydon.sync.event.ConnectionEvents;
+import me.braydon.sync.player.PlayerManager;
+import me.braydon.sync.server.ServerManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -13,6 +16,7 @@ public final class PlayerSyncEngine extends JavaPlugin {
     @Getter private static PlayerSyncEngine instance;
 
     private RedisDatabase redis;
+    private ServerManager serverManager;
 
     @Override
     public void onEnable() {
@@ -22,9 +26,11 @@ public final class PlayerSyncEngine extends JavaPlugin {
         // Initialize databases
         (redis = new RedisDatabase()).connect();
 
-        // Register events
-        getLogger().info("Registering events...");
-        new ConnectionEvents(this);
+        serverManager = new ServerManager(this);
+        new PlayerManager(this);
+
+        // Register commands
+        new PaperCommandManager(this).registerCommand(new PlayerSyncEngineCommand(this));
 
         getLogger().info("Welcome!");
     }

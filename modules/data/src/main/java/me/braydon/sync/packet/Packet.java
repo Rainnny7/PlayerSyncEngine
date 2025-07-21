@@ -10,4 +10,9 @@ package me.braydon.sync.packet;
  *
  * @author Braydon
  */
-public interface Packet { }
+public interface Packet {
+    class ChannelPrefix {
+        public static final String SERVER = "server";
+        public static final String PLAYER = "player";
+    }
+}

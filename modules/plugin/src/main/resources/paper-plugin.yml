@@ -2,5 +2,7 @@ name: PlayerSyncEngine
 version: ${project.version}
 main: me.braydon.sync.PlayerSyncEngine
 api-version: 1.21.7
+author: Braydon (Rainnny)
+website: https://github.com/Rainnny7/PlayerSyncEngine
 softdepend:
   - Citizens

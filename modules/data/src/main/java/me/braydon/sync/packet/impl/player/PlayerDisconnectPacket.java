@@ -8,22 +8,17 @@ import me.braydon.sync.server.MinecraftServer;
 import java.util.UUID;
 
 /**
- * A packet sent when a player connects
- * to a {@link MinecraftServer}.
+ * A packet sent when a player disconnects
+ * from a {@link MinecraftServer}.
  *
  * @author Braydon
  */
 @Data
-public final class PlayerConnectPacket implements Packet {
+public final class PlayerDisconnectPacket implements Packet {
     /**
      * The UUID of the player connecting.
      */
     @NonNull private final UUID uniqueId;
-
-    /**
-     * The name of the player connecting.
-     */
-    @NonNull private final String name;
 
     /**
      * The UUID of the {@link MinecraftServer}
