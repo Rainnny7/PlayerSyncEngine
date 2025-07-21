@@ -28,7 +28,7 @@ This is a multi-module Maven project structured into several layers, each with a
 - [ ] Food Level
 - [ ] Inventories
 - [ ] Realtime (Movement, Sneaking, Swimming, etc.)
-- [ ] Block Breaks
+- [ ] Blocks
 
 ## Environment Variables
 
