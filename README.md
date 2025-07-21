@@ -28,14 +28,15 @@ This is a multi-module Maven project structured into several layers, each with a
 - [ ] Food Level
 - [ ] Inventories
 - [ ] Realtime (Movement, Sneaking, Swimming, etc.)
+- [ ] Block Breaks
 
 ## Environment Variables
 
-| Name                       | Description                                                               | Default                |
-|----------------------------|---------------------------------------------------------------------------|------------------------|
-| `REDIS_URI`                | The URI of the Redis server to connect to.                                | redis://localhost:6379 |
-| `REDIS_PUBLISHING_THREADS` | The number of threads to use for publishing messages to the message bus.  | 8                      |
-| `REDIS_RECEIVING_THREADS`  | The number of threads to use for receiving messages from the message bus. | 4                      |
+| Name                       | Description                                                               | Default                  |
+|----------------------------|---------------------------------------------------------------------------|--------------------------|
+| `REDIS_URI`                | The URI of the Redis server to connect to.                                | `redis://localhost:6379` |
+| `REDIS_PUBLISHING_THREADS` | The number of threads to use for publishing messages to the message bus.  | `8`                      |
+| `REDIS_RECEIVING_THREADS`  | The number of threads to use for receiving messages from the message bus. | `4`                      |
 
 ## Roadmap
 - [ ] MongoDB integration for cold storage of inactive player data
