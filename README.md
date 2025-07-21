@@ -21,7 +21,7 @@ This is a multi-module Maven project structured into several layers, each with a
 - [not started] **`metrics/`** – The global metrics layer utilizing InfluxDB. Aggregates and exposes metrics across the entire cluster — including all game servers, orchestration events, and sync operations — to provide full visibility into system health and performance.
 
 ## Currently Synced
-- [ ] Chat
+- [ ] Chat (With key verification?)
 - [ ] Tablist
 - [ ] Health
 - [ ] Food Level
