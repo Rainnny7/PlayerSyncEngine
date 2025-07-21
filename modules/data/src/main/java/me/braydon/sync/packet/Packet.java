@@ -1,4 +1,4 @@
-package me.braydon.sync.data.packet;
+package me.braydon.sync.packet;
 
 /**
  * A packet that is sent across the message bus.

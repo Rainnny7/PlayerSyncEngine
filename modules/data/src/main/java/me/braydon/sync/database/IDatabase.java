@@ -1,4 +1,4 @@
-package me.braydon.sync.data.database;
+package me.braydon.sync.database;
 
 import lombok.NonNull;
 

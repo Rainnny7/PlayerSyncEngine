@@ -1,4 +1,4 @@
-package me.braydon.sync.data.server;
+package me.braydon.sync.server;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

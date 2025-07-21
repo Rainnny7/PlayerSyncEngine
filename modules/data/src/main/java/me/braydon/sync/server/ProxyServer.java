@@ -1,11 +1,11 @@
-package me.braydon.sync.data.server;
+package me.braydon.sync.server;
 
 import lombok.NonNull;
 
 import java.util.UUID;
 
 /**
- * A proxy Minecraft server, usually running Velocity or BungeeCord.
+ * A proxy Minecraft server, usually running <a href="https://velocitypowered.com">Velocity</a>.
  *
  * @author Braydon
  */

@@ -1,4 +1,4 @@
-package me.braydon.sync.data.packet;
+package me.braydon.sync.packet;
 
 /**
  * @author Braydon

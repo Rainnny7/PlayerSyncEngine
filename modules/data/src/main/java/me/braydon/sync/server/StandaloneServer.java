@@ -1,11 +1,11 @@
-package me.braydon.sync.data.server;
+package me.braydon.sync.server;
 
 import lombok.NonNull;
 
 import java.util.UUID;
 
 /**
- * A standalone Minecraft server, usually running Paper or Spigot.
+ * A standalone Minecraft server, usually running <a href="https://papermc.io">Paper</a>.
  *
  * @author Braydon
  */

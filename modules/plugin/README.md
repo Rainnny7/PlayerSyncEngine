@@ -1,3 +1,3 @@
 # Plugin Module
 
-The Spigot plugin. Handles synchronization of critical systems like chat, tablist, and physical player movement between servers. Redis serves dual purposes: as the internal messaging channel for real-time communication between plugin instances, and as the primary data store for player data (inventories, health, last location, etc.) enabling fast cross-server transfers. Also gathers and reports server-specific metrics like TPS, whitelist status, and player counts.
+The Paper plugin. Handles synchronization of critical systems like chat, tablist, and physical player movement between servers. Redis serves dual purposes: as the internal messaging channel for real-time communication between plugin instances, and as the primary data store for player data (inventories, health, last location, etc.) enabling fast cross-server transfers. Also gathers and reports server-specific metrics like TPS, whitelist status, and player counts.

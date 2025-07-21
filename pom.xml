@@ -86,41 +86,8 @@
                     </includeOnlyProperties>
                 </configuration>
             </plugin>
-
-            <!-- Automatically generate versions for dev builds -->
-            <plugin>
-                <groupId>me.braydon</groupId>
-                <artifactId>git-versioning-maven-plugin</artifactId>
-                <version>1.0.2</version>
-                <executions>
-                    <execution>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>versioning</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
-
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>plugin.yml</include>
-                </includes>
-            </resource>
-        </resources>
     </build>
-
-    <!-- Plugin Repositories -->
-    <pluginRepositories>
-        <pluginRepository>
-            <id>rainnny-repo-public</id>
-            <url>https://maven.rainnny.club/public</url>
-        </pluginRepository>
-    </pluginRepositories>
 
     <!-- Dependencies -->
     <dependencies>
