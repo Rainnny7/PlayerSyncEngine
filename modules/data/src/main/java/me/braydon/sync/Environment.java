@@ -16,6 +16,7 @@ public final class Environment<T> {
     public static final Environment<Integer> REDIS_RECEIVING_THREADS = new Environment<>("REDIS_PUBLISHING_THREADS", Integer.class, 4);
 
     // Server
+    public static final Environment<String> SERVER_GROUP = new Environment<>("SERVER_GROUP", String.class, "default");
     public static final Environment<Region> SERVER_REGION = new Environment<>("SERVER_REGION", Region.class, Region.NA);
 
     /**

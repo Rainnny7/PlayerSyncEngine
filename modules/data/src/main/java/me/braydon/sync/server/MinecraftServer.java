@@ -10,17 +10,22 @@ import java.util.UUID;
  *
  * @author Braydon
  */
-@AllArgsConstructor @Data
+@AllArgsConstructor @Data @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public final class MinecraftServer {
     /**
      * The UUID of this server.
      */
-    @NonNull private final UUID uniqueId;
+    @EqualsAndHashCode.Include @NonNull private final UUID uniqueId;
+
+    /**
+     * THe group this server is in.
+     */
+    @EqualsAndHashCode.Include @NonNull private final String group;
 
     /**
      * The region this server is in.
      */
-    @NonNull private final Region region;
+    @EqualsAndHashCode.Include @NonNull private final Region region;
 
     /**
      * The version of this server.

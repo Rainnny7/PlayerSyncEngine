@@ -42,23 +42,20 @@ public final class PlayerSyncEngineCommand extends BaseCommand {
 
             // Send the stats
             sendPluginVersion(sender);
-            sender.sendMessage(StyleUtils.style("<dark_gray>- %s: <white>%s".formatted(
-                    StyleUtils.secondary("Server Version"), Bukkit.getVersion()
-            )));
 
-            // Redis
-            sender.sendMessage(StyleUtils.style("<dark_gray>- " + StyleUtils.primary("Realtime")));
+            // Cluster
+            sender.sendMessage(StyleUtils.style("<dark_gray>- " + StyleUtils.primary("Cluster")));
             sender.sendMessage(StyleUtils.style("<dark_gray>    %s: <white>%s".formatted(
-                    StyleUtils.secondary("Type"), plugin.getRedis().getName()
-            )));
-            sender.sendMessage(StyleUtils.style("<dark_gray>    %s: <white>%sms".formatted(
-                    StyleUtils.secondary("Ping"), redisPing
+                    StyleUtils.secondary("Servers"), plugin.getServerManager().getServers().size()
             )));
 
             // Instance
             sender.sendMessage(StyleUtils.style("<dark_gray>- " + StyleUtils.primary("Instance")));
             sender.sendMessage(StyleUtils.style("<dark_gray>    %s: <white>%s".formatted(
                     StyleUtils.secondary("Unique ID"), thisServer.getUniqueId()
+            )));
+            sender.sendMessage(StyleUtils.style("<dark_gray>    %s: <white>%s".formatted(
+                    StyleUtils.secondary("Group"), thisServer.getGroup()
             )));
             sender.sendMessage(StyleUtils.style("<dark_gray>    %s: <white>%s".formatted(
                     StyleUtils.secondary("Region"), thisServer.getRegion().getName()
@@ -68,6 +65,18 @@ public final class PlayerSyncEngineCommand extends BaseCommand {
             )));
             sender.sendMessage(StyleUtils.style("<dark_gray>    %s: <white>%s".formatted(
                     StyleUtils.secondary("Uptime"), TimeUtils.format(System.currentTimeMillis() - thisServer.getFirstSeen())
+            )));
+            sender.sendMessage(StyleUtils.style("<dark_gray>    %s: <white>%s".formatted(
+                    StyleUtils.secondary("Version"), Bukkit.getVersion()
+            )));
+
+            // Redis
+            sender.sendMessage(StyleUtils.style("<dark_gray>- " + StyleUtils.primary("Event Bus")));
+            sender.sendMessage(StyleUtils.style("<dark_gray>    %s: <white>%s".formatted(
+                    StyleUtils.secondary("Type"), plugin.getRedis().getName()
+            )));
+            sender.sendMessage(StyleUtils.style("<dark_gray>    %s: <white>%sms".formatted(
+                    StyleUtils.secondary("Ping"), redisPing
             )));
         });
     }

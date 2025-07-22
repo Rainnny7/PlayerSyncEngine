@@ -20,14 +20,15 @@ This is a multi-module Maven project structured into several layers, each with a
 - [not started] **`metrics/`** – The global metrics layer utilizing InfluxDB. Aggregates and exposes metrics across the entire cluster — including all game servers, orchestration events, and sync operations — to provide full visibility into system health and performance.
 
 ## Currently Synced
+- [x] Server Statuses
 - [ ] Connected Players
 - [ ] Chat (With key verification?)
 - [ ] Tablist
 - [ ] Health
 - [ ] Food Level
 - [ ] Inventories
-- [ ] Realtime (Movement, Sneaking, Swimming, etc.)
-- [ ] Blocks
+- [ ] Realtime (Movement, Sneaking, Swimming, etc.)?
+- [ ] Blocks?
 - [ ] World Stats?
 - [ ] World Time / Weather?
 - [ ] Advancements?
@@ -39,6 +40,7 @@ This is a multi-module Maven project structured into several layers, each with a
 | `REDIS_URI`                | The URI of the Redis server to connect to.                                | `redis://localhost:6379` |
 | `REDIS_PUBLISHING_THREADS` | The number of threads to use for publishing messages to the message bus.  | `8`                      |
 | `REDIS_RECEIVING_THREADS`  | The number of threads to use for receiving messages from the message bus. | `4`                      |
+| `SERVER_GROUP`             | The group this server is in.                                              | `default`                |
 | `SERVER_REGION`            | The region this server is in.                                             | `NA`                     |
 
 ## Roadmap

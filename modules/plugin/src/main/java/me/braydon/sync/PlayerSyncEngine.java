@@ -4,6 +4,7 @@ import co.aikar.commands.PaperCommandManager;
 import lombok.Getter;
 import me.braydon.sync.command.PlayerSyncEngineCommand;
 import me.braydon.sync.database.redis.RedisDatabase;
+import me.braydon.sync.packet.PacketHandler;
 import me.braydon.sync.player.PlayerManager;
 import me.braydon.sync.server.ServerManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -27,6 +28,7 @@ public final class PlayerSyncEngine extends JavaPlugin {
         (redis = new RedisDatabase()).connect();
 
         serverManager = new ServerManager(this);
+        PacketHandler.initialize(serverManager.getThisServer().getUniqueId());
         new PlayerManager(this);
 
         // Register commands

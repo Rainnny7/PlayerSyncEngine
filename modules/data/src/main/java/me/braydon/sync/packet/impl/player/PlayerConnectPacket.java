@@ -1,8 +1,10 @@
 package me.braydon.sync.packet.impl.player;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import me.braydon.sync.packet.Packet;
+import me.braydon.sync.packet.annotation.PacketId;
 import me.braydon.sync.server.MinecraftServer;
 
 import java.util.UUID;
@@ -13,10 +15,10 @@ import java.util.UUID;
  *
  * @author Braydon
  */
-@Data
-public final class PlayerConnectPacket implements Packet {
+@PacketId(Packet.PlayerPacket.CONNECT) @Data @EqualsAndHashCode(callSuper = true)
+public final class PlayerConnectPacket extends Packet {
     /**
-     * The UUID of the player connecting.
+     * The unique id of the player connecting.
      */
     @NonNull private final UUID uniqueId;
 
@@ -24,10 +26,4 @@ public final class PlayerConnectPacket implements Packet {
      * The name of the player connecting.
      */
     @NonNull private final String name;
-
-    /**
-     * The UUID of the {@link MinecraftServer}
-     * this player player is connecting to.
-     */
-    @NonNull private final UUID serverId;
 }

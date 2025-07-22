@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class PlayerManager implements Listener {
     @NonNull private final PlayerSyncEngine plugin;
 
-    private final ConcurrentHashMap<UUID, ConnectedPlayer> players = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<UUID, Player> players = new ConcurrentHashMap<>();
 
     public PlayerManager(@NonNull PlayerSyncEngine plugin) {
         this.plugin = plugin;
@@ -32,14 +32,20 @@ public final class PlayerManager implements Listener {
     private void onJoin(@NonNull PlayerJoinEvent event) {
         // Notify other servers that a player has connected
         Player player = event.getPlayer();
-        plugin.getRedis().publish(Packet.ChannelPrefix.PLAYER, new PlayerConnectPacket(player.getUniqueId(),
-                player.getName(), plugin.getServerManager().getThisServer().getUniqueId()));
+        plugin.getRedis().publish(
+                Packet.ChannelPrefix.PLAYER,
+                plugin.getServerManager().getThisServer().getUniqueId(),
+                new PlayerConnectPacket(player.getUniqueId(), player.getName())
+        );
     }
 
     @EventHandler
     private void onQuit(@NonNull PlayerQuitEvent event) {
         // Notify other servers that a player has disconnected
-        plugin.getRedis().publish(Packet.ChannelPrefix.PLAYER, new PlayerDisconnectPacket(event.getPlayer().getUniqueId(),
-                plugin.getServerManager().getThisServer().getUniqueId()));
+        plugin.getRedis().publish(
+                Packet.ChannelPrefix.PLAYER,
+                plugin.getServerManager().getThisServer().getUniqueId(),
+                new PlayerDisconnectPacket(event.getPlayer().getUniqueId())
+        );
     }
 }

@@ -15,10 +15,14 @@ import me.braydon.sync.common.ThreadPoolBuilder;
 import me.braydon.sync.database.IDatabase;
 import me.braydon.sync.database.IMessageBus;
 import me.braydon.sync.packet.Packet;
+import me.braydon.sync.packet.PacketHandler;
+import me.braydon.sync.packet.annotation.PacketId;
 import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
 import java.time.Duration;
+import java.util.Objects;
+import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 
 /**
@@ -87,6 +91,37 @@ public final class RedisDatabase implements IDatabase<StatefulRedisConnection<St
     }
 
     /**
+     * Publish a packet to the message bus.
+     *
+     * @param channelPrefix the channel prefix to use
+     * @param serverId the id of the server that sent the packet
+     * @param packet        the packet to publish
+     */
+    @Override
+    public void publish(@NonNull String channelPrefix, @NonNull UUID serverId, @NonNull Packet packet) {
+        packet.setServerId(serverId); // Ensure all packets have a server id
+
+        String packetId = Objects.requireNonNull(packet.getClass().getAnnotation(PacketId.class)).value();
+        String channel = Environment.SERVER_GROUP.getValue() + ":" + channelPrefix + ":" + packetId;
+        publishingThreadPool.submit(() -> {
+            StatefulRedisConnection<String, String> connection = null;
+            try {
+                connection = publishingPool.borrowObject();
+                RedisAsyncCommands<String, String> commands = connection.async();
+                commands.publish(channel, Constants.GSON.toJson(packet));
+            } catch (Exception ex) {
+                log.error("Error publishing packet {}:", channel, ex);
+            } finally {
+                if (connection != null) {
+                    try {
+                        publishingPool.returnObject(connection);
+                    } catch (Exception ignored) { }
+                }
+            }
+        });
+    }
+
+    /**
      * Get the ping to this database.
      *
      * @return the ping in milliseconds
@@ -114,8 +149,8 @@ public final class RedisDatabase implements IDatabase<StatefulRedisConnection<St
             @Override
             public void message(@NonNull String pattern, @NonNull String channel, @NonNull String message) {
                 receivingThreadPool.submit(() -> {
-                    System.out.println("channel = " + channel);
-                    System.out.println("message = " + message);
+                    String[] split = channel.split(":");
+                    PacketHandler.firePacket(split[split.length - 1], message);
                 });
             }
 
@@ -131,7 +166,8 @@ public final class RedisDatabase implements IDatabase<StatefulRedisConnection<St
             @Override
             public void punsubscribed(@NonNull String pattern, long count) { }
         });
-        receivingCommands.psubscribe("server:*", "player:*");
+        String serverGroup = Environment.SERVER_GROUP.getValue();
+        receivingCommands.psubscribe(serverGroup + ":server:*", serverGroup + ":player:*");
     }
 
     /**
@@ -171,32 +207,5 @@ public final class RedisDatabase implements IDatabase<StatefulRedisConnection<St
         config.setBlockWhenExhausted(false); // Don't block, fail fast
         config.setMaxWait(Duration.ofMillis(100));
         return config;
-    }
-
-    /**
-     * Publish a packet to the message bus.
-     *
-     * @param channelPrefix the channel prefix to use
-     * @param packet        the packet to publish
-     */
-    @Override
-    public void publish(@NonNull String channelPrefix, @NonNull Packet packet) {
-        String channel = channelPrefix + ":" + packet.getClass().getName();
-        publishingThreadPool.submit(() -> {
-            StatefulRedisConnection<String, String> connection = null;
-            try {
-                connection = publishingPool.borrowObject();
-                RedisAsyncCommands<String, String> commands = connection.async();
-                commands.publish(channelPrefix + ":" + packet.getClass().getName(), Constants.GSON.toJson(packet));
-            } catch (Exception ex) {
-                log.error("Error publishing packet {}:", channel, ex);
-            } finally {
-                if (connection != null) {
-                    try {
-                        publishingPool.returnObject(connection);
-                    } catch (Exception ignored) { }
-                }
-            }
-        });
     }
 }
